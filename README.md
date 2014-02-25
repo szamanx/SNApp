@@ -1,7 +1,8 @@
 SNApp
 =====
 SNApp (SocialNetworkingApp)
-@author Daniel Kuras
+
+@author Daniel
 
 Application requires Java 5+, maven
 Application is a working prototype although not every scenario is fully tested (unit & integration). User interaction is rendered on terminal console and application logs are saved into log file. Also there is no proper error handling, data validation, javadoc/comments.
