@@ -12,8 +12,8 @@
         </encoder>
     </appender>
 
-    <logger name="snapp" level="INFO"/>
-    <root level="INFO">
+    <logger name="snapp" level="DEBUG"/>
+    <root level="DEBUG">
         <appender-ref ref="FILE"/>
     </root>
 </configuration>
