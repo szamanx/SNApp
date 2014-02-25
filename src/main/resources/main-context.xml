@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <bean id="snapp.runner" class="snapp.controller.command.runner.SerialCommandRunner"/>
+
+    <bean id="snapp.command.factory" class="snapp.controller.command.CommandFactory"
+          p:communicationService-ref="snapp.service.communication"
+          p:tokenizers-ref="snapp.tekenizer.map"
+          p:messageRenderer-ref="snapp.renderer"/>
+
+    <bean id="snapp.service.communication" class="snapp.service.CommunicationServiceImpl" p:userDao-ref="snapp.integration.user.dao"/>
+
+    <util:map id="snapp.tekenizer.map">
+        <entry key="POSTING" value-ref="snapp.tokenizer.posting"/>
+        <entry key="READING" value-ref="snapp.tokenizer.reading"/>
+        <entry key="FOLLOWING" value-ref="snapp.tokenizer.following"/>
+        <entry key="WALL" value-ref="snapp.tokenizer.wall"/>
+    </util:map>
+
+    <bean id="snapp.tokenizer.posting" class="org.springframework.batch.item.file.transform.RegexLineTokenizer"
+          p:regex="^([a-zA-Z]{1,}) -> (.{1,})$"/>
+    <bean id="snapp.tokenizer.reading" class="org.springframework.batch.item.file.transform.RegexLineTokenizer"
+          p:regex="^([a-zA-Z]{1,})$"/>
+    <bean id="snapp.tokenizer.following" class="org.springframework.batch.item.file.transform.RegexLineTokenizer"
+          p:regex="^([a-zA-Z]{1,}) follow (.{1,})$"/>
+    <bean id="snapp.tokenizer.wall" class="org.springframework.batch.item.file.transform.RegexLineTokenizer"
+          p:regex="^([a-zA-Z]{1,}) wall$"/>
+
+
+
+</beans>

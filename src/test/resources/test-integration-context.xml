@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="dl-context.xml" />
+    <import resource="main-context.xml" />
+
+    <bean id="snapp.renderer" class="snapp.controller.message.renderer.StdoutMessageRenderer" />
+
+    <bean id="test.snaap.printstream" class="java.io.PrintStream">
+        <constructor-arg index="0" type="java.io.OutputStream"  ref="test.snaap.bytearrayoutputstream" />
+    </bean>
+
+    <bean id="test.snaap.bytearrayoutputstream" class="java.io.ByteArrayOutputStream"/>
+
+</beans>
